@@ -1,7 +1,7 @@
 Package: wtsps
 Type: Package
 Title: An R client for handling processing of remote sensing time series
-Version: 2017.8
+Version: 1.0.0
 Date: 2017-08-09
 Authors@R: c(person("Luiz Fernando", "Assis", role = c("aut", "cre"), email ="luizffga@dpi.inpe.br"))
 Author: Luiz Fernando Assis
