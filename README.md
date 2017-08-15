@@ -4,7 +4,7 @@
 
 ## Build the package:
 
-Clone the project: git clone https://github.com/e-sensing/wtsps.R.git.
+Clone the project: git clone https://github.com/e-sensing/wtsps.git.
 Open Rstudio, go to File - Open Project and pick the file wtsps.Rproj.
 Install the required package install.packages("roxygen2").
 Go to the Build tab in the upper-right panel and press the button Build & Reload. 
