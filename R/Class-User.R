@@ -48,7 +48,7 @@ setMethod(
     requestHTTP <-paste(serverURL,"manage_permissions?login=", .Object@login, sep="") 
     
     # submit HTTP request and get JSON response
-    responseJSON <- parseJSON(sendRequest(requestHTTP))
+    responseJSON <- parseJsonResponse(sendHttpRequest(requestHTTP))
     
     # assign attribute values (permissions) to the User object
     .Object@permissions <- responseJSON$permissions

@@ -37,19 +37,28 @@ setMethod(
   # Function definition
   definition = function(.Object, serverURL = "character") {
     
-    # if serverURL is missing
+    # if serverURL use a local WTSPS server
     if (missing(serverURL))
-      .Object@serverURL <- "www.github.com/e-sensing/wtsps/inst/extdata/wtsps/"
+      .Object@serverURL <- "inst/extdata/wtsps/"
     else
       .Object@serverURL <- serverURL
     
-    # list algorithms from WTSPS 
-    requestHTTP <-paste(serverURL,"list_algorithms", sep = "") 
+    # build list algorithms request string
+    request <- paste(.Object@serverURL, "list_algorithms", sep = "")
     
-    # submit HTTP request and get JSON response
-    responseJSON <- parseJSON(sendRequest(requestHTTP))
-    .Object@algorithms <- responseJSON
+    # check whether HTTP request or not
+    if (RCurl::url.exists(request))
+       response <- sendHttpRequest(request) # submit HTTP request
+    else
+       response <- readLines(paste(request, ".json", sep = "")) # read direclty a json file
     
+    # parse JSON response
+    responseJSON <- parseJsonResponse(response)
+    
+    # assign attribute values (algorithms) to the WTSPS object
+    .Object@algorithms <- responseJSON$algorithms
+    
+    # check whether .Object is valid or not
     methods::validObject(.Object)
     
     return(.Object)

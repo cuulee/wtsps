@@ -24,16 +24,16 @@ validAlgorithmObject <- function(object) {
     errors <- c(errors, message)
   }
   
-  length_input_parameters <- length(object@input_parameters)
+  length_input_parameters <- length(unlist(object@input_parameters))
   
-  if (length_input_parameters != 1) {
+  if (length_input_parameters < 1) {
     messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no input parameters!", sep = "")
     errors <- c(errors, message)
   }
   
-  length_output <- length(object@output)
+  length_output <- length(unlist(object@output))
   
-  if (length_output != 1) {
+  if (length_output < 1) {
     messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no output!", sep = "")
     errors <- c(errors, message)
   }
@@ -128,7 +128,7 @@ setMethod(
 #' @param object An Algorithm object
 #' @aliases getDescription-generic
 #' @export
-setGeneric("getDescription", function(object){ standardGeneric("getDescription")})
+setGeneric("getDescription", function(object){standardGeneric("getDescription")})
 
 #' @rdname getDescription
 setMethod(
@@ -140,6 +140,36 @@ setMethod(
   definition = function(object) {
     
     return (object@description)
+    
+  }
+  
+)
+
+#' Returns an Algorithm Class in a WTSPS server URL queried by name
+#'
+#' @param serverInfo a WTSPS server object or URL
+#' @param name An Algorithm name
+#' @aliases describeAlgorithm-generic
+#' @export
+setGeneric("describeAlgorithm", function(serverInfo, name){standardGeneric("describeAlgorithm")})
+
+#' @rdname describeAlgorithm
+setMethod(
+  
+  f = "describeAlgorithm",
+  
+  signature(serverInfo = "ANY", name = "character"), 
+  
+  definition = function(serverInfo, name) {
+    
+    if (class(serverInfo) == "WTSPS")
+      serverURL <- serverInfo@serverURL
+    else
+      serverURL <- serverInfo
+    
+    alg <- Algorithm(serverURL, name)
+    
+    return (alg)
     
   }
   

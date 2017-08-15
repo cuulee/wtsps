@@ -48,7 +48,7 @@ setMethod(
     requestHTTP <-paste(serverURL, "status_process?id=", .Object@id, sep="") 
     
     # submit HTTP request and get JSON response
-    responseJSON <- parseJSON(sendRequest(requestHTTP))
+    responseJSON <- parseJsonResponse(sendHttpRequest(requestHTTP))
     
     # assign attribute values (status) to the Process object
     .Object@status <- responseJSON$status

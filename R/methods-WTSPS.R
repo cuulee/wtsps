@@ -18,21 +18,21 @@ validWTSPSObject <- function(object) {
   length_serverURL <- length(object@serverURL)
   
   if (length_serverURL != 1) {
-    messsage <- paste("[WTSPS: Object validation] URL server was not provided!", sep = "")
+    messsage <- paste("[WTSPS: Object validation] WTSPS has no URL server!", sep = "")
     errors <- c(errors, message)
   }
   
   nchar_serverURL <- nchar(object@serverURL)
   
   if (nchar_serverURL <= 1) {
-    message <- paste("[WTSPS: Object validation] URL server is invalid!", sep = "")
+    message <- paste("[WTSPS: Object validation] WTSPS has an invalid URL server!", sep = "")
     errors <- c(errors, message)
   }
   
-  length_serverURL <- length(object@algorithms)
+  length_algorithms <- length(object@algorithms)
   
-  if (length_serverURL != 1) {
-    messsage <- paste("[WTSPS: Object validation] URL server provided has no algorithm!", sep = "")
+  if (length_algorithms < 1) {
+    messsage <- paste("[WTSPS: Object validation] WTSPS has no algorithms!", sep = "")
     errors <- c(errors, message)
   }
   
@@ -91,6 +91,36 @@ setMethod(
   definition = function(object) {
     
     return(object@algorithms)
+    
+  }
+  
+)
+
+#' Returns the WTSPS object's algorithms
+#'
+#' @param serverInfo A WTSPS object or URL
+#' @aliases listAlgorithms-generic
+#' @export
+setGeneric("listAlgorithms", function(serverInfo){standardGeneric("listAlgorithms")})
+
+#' @rdname listAlgorithms
+setMethod(
+  
+  f = "listAlgorithms",
+  
+  signature = "ANY", 
+  
+  definition = function(serverInfo) {
+    
+    if (class(serverInfo) == "WTSPS") 
+      return(serverInfo@algorithms) # list algorithms
+    else if (class(serverInfo) == "character") {
+      wtsps <- WTSPS(serverInfo)
+      return(wtsps@algorithms)
+    } 
+    else {
+       stop("Type not recognized (need to provide \"character\" or a \"WTSPS\" object)") 
+    }
     
   }
   
