@@ -1,10 +1,17 @@
-Algorithm <- function(serverUrl, name, parameters, output, description) {
+#' Wrapper function Algorithm
+#'
+#' @param serverURL a WTSPS server URL
+#' @param name an Algorithm name
+#' 
+#' @name Algorithm
+#' @rdname Algorithm-class
+#' @export
+Algorithm <- function(serverURL, name) {
   
-  methods::new(Class = "Algorithm", 
-              name = name, 
-              parameters = parameters, 
-              output = output, 
-              description = description)
+  methods::new (Class = "Algorithm", 
+                serverURL = serverURL,
+                name = name)
+  
 }
 
 validAlgorithmObject <- function(object) {
@@ -13,28 +20,28 @@ validAlgorithmObject <- function(object) {
   length_name <- length(object@name)
   
   if (length_name != 1) {
-    messsage <- paste("[WTSPS: validation Class] Algorithm name was not provided!!!", sep = "")
+    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no name!", sep = "")
     errors <- c(errors, message)
   }
   
-  length_parameters <- length(object@parameters)
+  length_input_parameters <- length(object@input_parameters)
   
-  if (length_parameters != 1) {
-    messsage <- paste("[WTSPS: validation Class] Algorithm parameters was not provided!!!", sep = "")
+  if (length_input_parameters != 1) {
+    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no input parameters!", sep = "")
     errors <- c(errors, message)
   }
   
   length_output <- length(object@output)
   
   if (length_output != 1) {
-    messsage <- paste("[WTSPS: validation Class] Algorithm output was not provided!!!", sep = "")
+    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no output!", sep = "")
     errors <- c(errors, message)
   }
   
   length_description <- length(object@description)
   
   if (length_description != 1) {
-    messsage <- paste("[WTSPS: validation Class] Algorithm description was not provided!!!", sep = "")
+    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no description!", sep = "")
     errors <- c(errors, message)
   }
   
@@ -50,8 +57,14 @@ setValidity(
   
 )
 
-setGeneric("getName", function(object){ standardGeneric("getName")})
+#' Returns an Algorithm name
+#'
+#' @param object An Algorithm object
+#' @aliases getName-generic
+#' @export
+setGeneric("getName", function(object){standardGeneric("getName")})
 
+#' @rdname getName
 setMethod(
   
   f = "getName",
@@ -66,24 +79,36 @@ setMethod(
   
 )
 
-setGeneric("getParameters", function(object){ standardGeneric("getParameters")})
+#' Returns Algorithm parameters
+#'
+#' @param object An Algorithm object
+#' @aliases getInputParameters-generic
+#' @export
+setGeneric("getInputParameters", function(object){standardGeneric("getInputParameters")})
 
+#' @rdname getInputParameters
 setMethod(
   
-  f = "getParameters",
+  f = "getInputParameters",
   
   signature = "Algorithm", 
   
   definition = function(object) {
     
-    return (object@parameters)
+    return (object@input_parameters)
     
   }
   
 )
 
+#' Returns algorithm output
+#'
+#' @param object An Algorithm object
+#' @aliases getOutput-generic
+#' @export
 setGeneric("getOutput", function(object){ standardGeneric("getOutput")})
 
+#' @rdname getOutput
 setMethod(
   
   f = "getOutput",
@@ -98,8 +123,14 @@ setMethod(
   
 )
 
+#' Returns algorithm description
+#'
+#' @param object An Algorithm object
+#' @aliases getDescription-generic
+#' @export
 setGeneric("getDescription", function(object){ standardGeneric("getDescription")})
 
+#' @rdname getDescription
 setMethod(
   
   f = "getDescription",

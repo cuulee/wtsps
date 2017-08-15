@@ -1,7 +1,14 @@
-WTSPS <- function(serverUrl) {
+#' Wrapper function WTSPS
+#'
+#' @param serverURL a WTSPS server URL
+#' 
+#' @name WTSPS
+#' @rdname WTSPS-class
+#' @export
+WTSPS <- function(serverURL) {
   
   methods::new (Class = "WTSPS", 
-                serverUrl = serverUrl)
+                serverURL = serverURL)
   
 }
 
@@ -11,14 +18,21 @@ validWTSPSObject <- function(object) {
   length_serverURL <- length(object@serverURL)
   
   if (length_serverURL != 1) {
-    messsage <- paste("[WTSPS: validation Class] URL server was not provided!!!", sep = "")
+    messsage <- paste("[WTSPS: Object validation] URL server was not provided!", sep = "")
     errors <- c(errors, message)
   }
   
   nchar_serverURL <- nchar(object@serverURL)
   
   if (nchar_serverURL <= 1) {
-    message <- paste("[WTSPS: validation Class] serverURL has an invalid URL server", sep = "")
+    message <- paste("[WTSPS: Object validation] URL server is invalid!", sep = "")
+    errors <- c(errors, message)
+  }
+  
+  length_serverURL <- length(object@algorithms)
+  
+  if (length_serverURL != 1) {
+    messsage <- paste("[WTSPS: Object validation] URL server provided has no algorithm!", sep = "")
     errors <- c(errors, message)
   }
   
@@ -27,36 +41,21 @@ validWTSPSObject <- function(object) {
 }
 
 setValidity(
-      
+  
   Class = "WTSPS", 
   
   method = validWTSPSObject
   
 )
 
-setMethod(
-  
-  # initialize function
-  f = "initialize",
-  
-  # Method signature
-  signature = "WTSPS",
-  
-  # Function definition
-  definition = function(.Object, serverUrl) {
-    
-    .Object@serverUrl <- serverUrl
-    
-    methods::validObject(.Object)
-    
-    return(.Object)
-    
-  }
-  
-)
+#' Returns the WTSPS object's server URL
+#'
+#' @param object A WTSPS object
+#' @aliases getServerURL-generic
+#' @export
+setGeneric("getServerURL", function(object){standardGeneric("getServerURL")})
 
-setGeneric("getServerURL", function(object){ standardGeneric("getServerURL")})
-
+#' @rdname getServerURL
 setMethod(
   
   f = "getServerURL",
@@ -64,19 +63,25 @@ setMethod(
   signature = "WTSPS", 
   
   definition = function(object) {
-  
-    # if last character is different from slash add one
-    if(substr(object@serverUrl, nchar(object@serverUrl), nchar(object@serverUrl)) != "/") 
-    return(paste(object@serverUrl,"/", sep=""))
     
-    return (object@serverUrl)
-  
+    # if last character is different from slash add one
+    if(substr(object@serverURL, nchar(object@serverURL), nchar(object@serverURL)) != "/") 
+      return(paste(object@serverURL,"/", sep=""))
+    
+    return (object@serverURL)
+    
   }
   
 )
 
-setGeneric("getAlgorithms", function(object){ standardGeneric("getAlgorithms")})
+#' Returns the WTSPS object's algorithms
+#'
+#' @param object A WTSPS object
+#' @aliases getAlgorithms-generic
+#' @export
+setGeneric("getAlgorithms", function(object){standardGeneric("getAlgorithms")})
 
+#' @rdname getAlgorithms
 setMethod(
   
   f = "getAlgorithms",
@@ -85,7 +90,8 @@ setMethod(
   
   definition = function(object) {
     
+    return(object@algorithms)
+    
   }
   
 )
-
