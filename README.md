@@ -52,7 +52,7 @@ listAlgorithms("inst/extdata/wtsps/")
 ## [1] "TWDTW" "BFAST"
 ```
 
-We are also able to acquire any algorithm metadata with describeAlgorithm. This function returns an Algorithm class containing its name, input_parameters, output and description using a WTSPS object already created or directly a WTSPS server URL. 
+We are also able to acquire any algorithm metadata with describeAlgorithm. This function returns an Algorithm class containing its name, input_parameters, output and a description using a WTSPS object already created or directly a WTSPS server URL. 
 
 ```r
 describeAlgorithm(wtsps.server, "TWDTW")
