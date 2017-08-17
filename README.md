@@ -1,4 +1,4 @@
-# R Client API for Web Time Series Processing Service 
+# R Client API for Web Time Series Processing Service (WTSPS)
 
 **wtsps** is an R Client package for handling Web Time Series Processing Service (WTSPS) in the client side.
 
