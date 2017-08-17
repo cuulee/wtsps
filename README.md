@@ -5,8 +5,11 @@
 ## Build the package:
 
 Clone the project: git clone https://github.com/e-sensing/wtsps.git.
+
 Open Rstudio, go to File - Open Project and pick the file wtsps.Rproj.
+
 Install the required package install.packages("roxygen2").
+
 Go to the Build tab in the upper-right panel and press the button Build & Reload. 
 
 ## Getting started
@@ -24,7 +27,7 @@ A simple example of creating a WTSPS connection
 wtsps.server <- WTSPS()
 ```
 
-The result is a Object of Class WTSPS. 
+The result is an Object of Class WTSPS. 
 
 ``` r
 wtsps.server
@@ -49,7 +52,7 @@ listAlgorithms("inst/extdata/wtsps/")
 ## [1] "TWDTW" "BFAST"
 ```
 
-After that, we are able to acquire the algorithm metadata. This function returns a Algorithm class containing its name, input_parameters, output and description using a WTSPS object or simply a WTSPS server URL. 
+We are also able to acquire any algorithm metadata with describeAlgorithm. This function returns an Algorithm class containing its name, input_parameters, output and description using a WTSPS object already created or directly a WTSPS server URL. 
 
 ```r
 describeAlgorithm(wtsps.server, "TWDTW")
