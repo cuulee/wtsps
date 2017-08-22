@@ -24,7 +24,7 @@ library(wtscs) # R package name is wtscs
 A simple example of creating a WTSCS connection
 
 ``` r 
-wtscs.server <- WTSCS("inst/extdata/wtscs/")
+wtscs.server <- WTSCS(serverURL = "inst/extdata/wtscs/")
 ```
 
 The result is an Object of Class WTSCS. 
@@ -44,7 +44,7 @@ Slot "algorithms":
 It is possible to get the list of algorithms provided by a WTSCS service using a WTSCS object or simply a WTSCS server URL.
 
 ``` r
-listAlgorithms("inst/extdata/wtscs/")
+listAlgorithms(serverInfo = "inst/extdata/wtscs/")
 ```
 
 ``` r
@@ -54,7 +54,7 @@ listAlgorithms("inst/extdata/wtscs/")
 We are also able to acquire any algorithm metadata with describeAlgorithm. This function returns an Algorithm class containing its name, input_parameters, output and a description using a WTSCS object already created or directly a WTSCS server URL. 
 
 ```r
-describeAlgorithm(wtscs.server, "TWDTW")
+describeAlgorithm(serverInfo = wtscs.server, name = "TWDTW")
 ```
 ``` r
 An object of class "Algorithm"
@@ -78,7 +78,7 @@ Slot "description":
 Using input_parameters we can run any process with that algorithm as many parameters as possible.
 
 ```r
-run_process <- runProcess("inst/extdata/wtscs/", name = "TWDTW", patterns = "X")
+run_process <- runProcess(serverInfo = "inst/extdata/wtscs/", name = "TWDTW", patterns = "X")
 ```
 ```r
 run_process
@@ -96,7 +96,7 @@ Slot "command":
 After that, WTSCS generates an identifier for this process so the user can see its status if necessary.
 
 ```r
-status.proc <- statusProcess("inst/extdata/wtscs/", 1)
+status.proc <- statusProcess(serverInfo = "inst/extdata/wtscs/", processInfo = 1)
 ```
 ```r
 status.proc
@@ -114,7 +114,7 @@ Slot "command":
 Or even cancel the process.
 
 ```r
-cancel.proc <- cancelProcess("inst/extdata/wtscs/", 1)
+cancel.proc <- cancelProcess(serverInfo = "inst/extdata/wtscs/", processInfo = 1)
 ```
 ```r
 cancel.proc
