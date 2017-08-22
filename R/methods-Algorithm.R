@@ -1,6 +1,6 @@
 #' Wrapper function Algorithm
 #'
-#' @param serverURL a WTSPS server URL
+#' @param serverURL a WTSCS server URL
 #' @param name an Algorithm name
 #' 
 #' @name Algorithm
@@ -20,28 +20,28 @@ validAlgorithmObject <- function(object) {
   length_name <- length(object@name)
   
   if (length_name != 1) {
-    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no name!", sep = "")
+    messsage <- paste("[WTSCS: Algorithm Object validation] Algorithm has no name!", sep = "")
     errors <- c(errors, message)
   }
   
-  length_input_parameters <- length(unlist(object@input_parameters))
+  length_input_parameters <- length(object@input_parameters)
   
   if (length_input_parameters < 1) {
-    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no input parameters!", sep = "")
+    messsage <- paste("[WTSCS: Algorithm Object validation] Algorithm has no input parameters!", sep = "")
     errors <- c(errors, message)
   }
   
-  length_output <- length(unlist(object@output))
+  length_output <- length(object@output)
   
   if (length_output < 1) {
-    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no output!", sep = "")
+    messsage <- paste("[WTSCS: Algorithm Object validation] Algorithm has no output!", sep = "")
     errors <- c(errors, message)
   }
   
   length_description <- length(object@description)
   
   if (length_description != 1) {
-    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no description!", sep = "")
+    messsage <- paste("[WTSCS: Algorithm Object validation] Algorithm has no description!", sep = "")
     errors <- c(errors, message)
   }
   
@@ -145,32 +145,36 @@ setMethod(
   
 )
 
-#' Returns an Algorithm Class in a WTSPS server URL queried by name
+#' Assign Algorithm parameters to an Algorithm object
 #'
-#' @param serverInfo a WTSPS server object or URL
-#' @param name An Algorithm name
-#' @aliases describeAlgorithm-generic
+#' @param alg an Algorithm object
+#' @param algParameters Algorithm parameters
+#' @aliases applyAlgorithm-generic
 #' @export
-setGeneric("describeAlgorithm", function(serverInfo, name){standardGeneric("describeAlgorithm")})
+setGeneric("applyAlgorithm", function(alg, algParameters){standardGeneric("applyAlgorithm")})
 
-#' @rdname describeAlgorithm
+#' @rdname applyAlgorithm
 setMethod(
-  
-  f = "describeAlgorithm",
-  
-  signature(serverInfo = "ANY", name = "character"), 
-  
-  definition = function(serverInfo, name) {
+
+  f = "applyAlgorithm",
+
+  signature(alg = "Algorithm", algParameters = "character"),
+
+  definition = function(alg, algParameters) {
+
+    if(missing(algParameters))
+      stop("Missing Algorithm parameters")
     
-    if (class(serverInfo) == "WTSPS")
-      serverURL <- serverInfo@serverURL
-    else
-      serverURL <- serverInfo
+    names_input_parameters <- names(alg@input_parameters) # get input parameters
+    check <- TRUE
+    for(i in seq(1, length(algParameters), by = 2)) {
+      check <- algParameters[i] %in% names_input_parameters # check each parameter
+      if (!check)
+        break
+    }
     
-    alg <- Algorithm(serverURL, name)
-    
-    return (alg)
+    return(check)
     
   }
-  
+
 )

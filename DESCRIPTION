@@ -1,27 +1,28 @@
-Package: wtsps
+Package: wtscs
 Type: Package
-Title: An R client for handling processing of remote sensing time series
+Title: An R client for handling classification of remote sensing time series
 Version: 1.0.0
 Date: 2017-08-09
 Authors@R: c(person("Luiz Fernando", "Assis", role = c("aut", "cre"), email ="luizffga@dpi.inpe.br"))
-Author: Luiz Fernando Assis
+Author: Luiz Fernando Assis, Gilberto Camara, Gilberto Ribeiro, Karine Reis Ferreira, Lubia Vinhas, Eduardo Llapa
 Maintainer: Luiz Fernando Assis <luizffga@dpi.inpe.br>
-Description: wtsps is an R client package for Web Time Series Processing Service (WTSPS).
+Description: wtscs is an R client package for Web Time Series Classification Service (WTSCS).
 Depends: R (>= 3.0.0)
 Imports: methods,
+         utils,
          RCurl,
          jsonlite
 License: LGPL-3 + file LICENSE
 RoxygenNote: 6.0.1
-URL: https://github.com/e-sensing/wtsps.R
-BugReports: https://github.com/e-sensing/wtsps.R/issues
+URL: https://github.com/e-sensing/wtscs.R
+BugReports: https://github.com/e-sensing/wtscs.R/issues
 Collate: 
     'utils.R'
     'Class-Algorithm.R'
     'Class-Process.R'
     'Class-User.R'
-    'Class-WTSPS.R'
+    'Class-WTSCS.R'
     'methods-Algorithm.R'
     'methods-Process.R'
     'methods-User.R'
-    'methods-WTSPS.R'
+    'methods-WTSCS.R'

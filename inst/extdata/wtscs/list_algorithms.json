@@ -1,6 +1,5 @@
 {
   "algorithms": [
-    "TWDTW",
-    "BFAST"
+    "TWDTW"
   ]
 }

@@ -1,7 +1,8 @@
 #' @include utils.R
-#' Class WTSPS.
+#' 
+#' Class WTSCS.
 #'
-#' Class \code{WTSPS} declaration helps to define a Web Time Series Processing Service.
+#' Class \code{WTSCS} declaration helps to define a Web Time Series Processing Service.
 #' 
 #'@section Slots :
 #' \describe{
@@ -9,13 +10,13 @@
 #' \item{\code{algorithms}:}{Attribute of class \code{"character"}, algorithms of the server.}
 #' }
 #' 
-#' @name WTSPS-class
-#' @rdname WTSPS-class
-#' @exportClass WTSPS
+#' @name WTSCS-class
+#' @rdname WTSCS-class
+#' @exportClass WTSCS
 setClass(
   
   # Set the name for the class
-  Class = "WTSPS",
+  Class = "WTSCS",
   
   # Define the slots
   slots = c(
@@ -25,37 +26,33 @@ setClass(
   
 )
 
-# Constructor method of WTSPS Class.
+# Constructor method of WTSCS Class.
 setMethod(
   
   # initialize function
   f = "initialize",
   
   # Method signature
-  signature = "WTSPS",
+  signature = "WTSCS",
   
   # Function definition
   definition = function(.Object, serverURL = "character") {
     
-    # if serverURL use a local WTSPS server
+    # if WTSCS server URL is missing
     if (missing(serverURL))
-      .Object@serverURL <- "inst/extdata/wtsps/"
-    else
-      .Object@serverURL <- serverURL
+       stop("Missing a WTSCS server URL")
+    else if (class(serverURL) != "character")   
+            stop("WTSCS server URL type is not recognized")
     
     # build list algorithms request string
-    request <- paste(.Object@serverURL, "list_algorithms", sep = "")
-    
-    # check whether HTTP request or not
-    if (RCurl::url.exists(request))
-       response <- sendHttpRequest(request) # submit HTTP request
-    else
-       response <- readLines(paste(request, ".json", sep = "")) # read direclty a json file
+    request <- paste(serverURL, "list_algorithms", sep = "")
+    response  <- sendRequest(request)
     
     # parse JSON response
-    responseJSON <- parseJsonResponse(response)
+    responseJSON <- parseResponse(response)
     
-    # assign attribute values (algorithms) to the WTSPS object
+    # assign attribute values (algorithms) to the WTSCS object
+    .Object@serverURL <- serverURL
     .Object@algorithms <- responseJSON$algorithms
     
     # check whether .Object is valid or not

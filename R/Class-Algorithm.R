@@ -1,7 +1,8 @@
 #' @include utils.R
+#'
 #' Class Algorithm.
 #'
-#' Class \code{Algorithm} declaration helps to define an Algorithm in Web Time Series Processing Service.
+#' Class \code{Algorithm} declaration helps to define an Algorithm in Web Time Series Classification Service.
 #' 
 #'@section Slots :
 #' \describe{   
@@ -41,37 +42,27 @@ setMethod(
   # Function definition
   definition = function(.Object, serverURL = "character", name = "character") {
     
+    # if WTSPS server URL is missing
     if (missing(serverURL))
-      serverURL <- "inst/extdata/wtsps/"
-      
+      stop("Missing a WTSCS server URL")
+    else if (class(serverURL) != "character")   
+      stop("WTSCS server URL type is not recognized")
+    
+    # if Algorithm name is missing
     if (missing(name))
-      .Object@name <- "TWDTW"
-    else 
-      .Object@name <- name
+      stop("Missing an Algorithm name")
+    else if (class(name) != "character")   
+      stop("Algorithm name type is not recognized")
     
-    # describe metadata from Algorithm 
-    request <- paste(serverURL, "describe_algorithm", sep="") 
+    # send request with describe algorithm
+    request <- paste(serverURL, "describe_algorithm?name=", name, sep="") 
+    response  <- sendRequest(request)
     
-    # check whether HTTP request or not
-    if (RCurl::url.exists(request)) {
-      request <- paste(request, "?name=", .Object@name)
-      response <- sendHttpRequest(request) # submit HTTP request
-      responseJSON <- parseJsonResponse(response) # get JSON response as list
-    }
-    else { # only works for the wtsps package server
-      response <- readLines(paste(request, ".json", sep = "")) # read direclty a json file
-      auxJSON <- parseJsonResponse(response) # get JSON response as list
-      idx_row <- which(auxJSON$algorithms$name == .Object@name)
-      responseJSON <- auxJSON$algorithms[idx_row, ]
-      responseJSON$name <- auxJSON$algorithms$name[idx_row] # replace algorith name of the queried name
-      idx_col_input_parameters <- which(!is.na(auxJSON$algorithms[idx_row,]$input_parameters))
-      responseJSON$input_parameters <- auxJSON$algorithms[idx_row,]$input_parameters[,idx_col_input_parameters] # replace algorith input_parameters of the queried name
-      idx_col_output <- which(!is.na(auxJSON$algorithms[idx_row,]$output))
-      responseJSON$output <- auxJSON$algorithms[idx_row,]$output[, idx_col_output] # replace algorith output of the queried name
-      responseJSON$description <- auxJSON$algorithms$description[idx_row]
-    }
+    # get JSON response as list
+    responseJSON <- parseResponse(response)
     
-    # assign attribute values (parameters, output, description) to the Algorithm object
+    # assign attribute values (name, parameters, output, description) to the Algorithm object
+    .Object@name <- name 
     .Object@input_parameters <- unlist(responseJSON$input_parameters) # list of input parameters
     .Object@output <- unlist(responseJSON$output) # list of output parameters
     .Object@description <- responseJSON$description

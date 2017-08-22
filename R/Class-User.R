@@ -1,7 +1,8 @@
 #' @include utils.R
+#' 
 #' Class User.
 #'
-#' Class \code{User} declaration helps to define a Web Time Series Processing Service.
+#' Class \code{User} declaration helps to define a Web Time Series Classification Service.
 #' 
 #'@section Slots :
 #' \describe{
@@ -37,23 +38,7 @@ setMethod(
   # Function definition
   definition = function(.Object, serverURL = "character", login = "character") {
     
-    # if serverURL is missing
-    if (missing(serverURL))
-      serverURL <- "www.github.com/e-sensing/wtsps/inst/extdata/wtsps/" # server URL in the R package
-    
-    if (missing(login))
-      .Object@login <- 1 # first User identifier
-    
-    # manage permissions from User 
-    requestHTTP <-paste(serverURL,"manage_permissions?login=", .Object@login, sep="") 
-    
-    # submit HTTP request and get JSON response
-    responseJSON <- parseJsonResponse(sendHttpRequest(requestHTTP))
-    
-    # assign attribute values (permissions) to the User object
-    .Object@permissions <- responseJSON$permissions
-    
-    methods::validObject(.Object)
+    ### TO DO
     
     return(.Object)
     

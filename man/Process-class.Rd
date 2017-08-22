@@ -4,23 +4,26 @@
 \name{Process-class}
 \alias{Process-class}
 \alias{Process}
-\title{Wrapper function Algorithm}
+\title{Wrapper function Process}
 \usage{
-Process(serverURL, id)
+Process(serverInfo, processInfo, processStatus)
 }
 \arguments{
-\item{serverURL}{a WTSPS server URL}
+\item{serverInfo}{a WTSCS server URL}
 
-\item{id}{a Process identifier}
+\item{processInfo}{a Process identifier}
+
+\item{processStatus}{a Process identifier}
 }
 \description{
-Wrapper function Algorithm
+Wrapper function Process
 }
 \section{Slots }{
 
 \describe{
-\item{\code{id}:}{Attribute of class \code{"character"}, an identifier of a Process.}
+\item{\code{uuid}:}{Attribute of class \code{"character"}, an identifier of a Process.}
 \item{\code{status}:}{Attribute of class \code{"character"}, a status of a Process.}
+\item{\code{command}:}{Attribute of class \code{"character"}, a command of a Process.}
 }
 }
 

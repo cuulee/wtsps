@@ -1,32 +1,35 @@
-#' Wrapper function Algorithm
+#' Wrapper function Process
 #'
-#' @param serverURL a WTSPS server URL
-#' @param id a Process identifier
+#' @param serverInfo a WTSCS server URL
+#' @param processInfo a Process identifier
+#' @param processStatus a Process identifier
 #' 
 #' @name Process
 #' @rdname Process-class
 #' @export
-Process <- function(serverURL, id) {
+Process <- function(serverInfo, processInfo, processStatus) {
   
   methods::new (Class = "Process", 
-                id = id)
+                serverInfo = serverInfo,
+                processInfo = processInfo,
+                processStatus = processStatus)
   
 }
 
 validProcessObject <- function(object) {
   
   errors <- character()
-  length_id <- length(object@id)
+  length_uuid <- length(object@uuid)
   
-  if (length_id != 1) {
-    messsage <- paste("[WTSPS: Process Object validation] Process has no id!", sep = "")
+  if (length_uuid != 1) {
+    messsage <- paste("[WTSCS: Process Object validation] Process has no id!", sep = "")
     errors <- c(errors, message)
   }
   
   length_status <- length(object@status)
   
   if (length_status != 1) {
-    messsage <- paste("[WTSPS: Process Object validation] Process has no status!", sep = "")
+    messsage <- paste("[WTSCS: Process Object validation] Process has no status!", sep = "")
     errors <- c(errors, message)
   }
   
@@ -45,20 +48,20 @@ setValidity(
 #' Returns a Process id
 #'
 #' @param object A Process object
-#' @aliases getId-generic
+#' @aliases getUuid-generic
 #' @export
-setGeneric("getId", function(object){ standardGeneric("getId")})
+setGeneric("getUuid", function(object){ standardGeneric("getUuid")})
 
-#' @rdname getId
+#' @rdname getUuid
 setMethod(
   
-  f = "getId",
+  f = "getUuid",
   
   signature = "Process", 
   
   definition = function(object) {
     
-    return (object@id)
+    return (object@uuid)
     
   }
   
@@ -84,4 +87,78 @@ setMethod(
     
   }
   
+)
+
+#' Returns a Process status
+#'
+#' @param object A Process object
+#' @aliases getCommand-generic
+#' @export
+setGeneric("getCommand", function(object){ standardGeneric("getCommand")})
+
+#' @rdname getCommand
+setMethod(
+  
+  f = "getCommand",
+  
+  signature = "Process", 
+  
+  definition = function(object) {
+    
+    return (object@command)
+    
+  }
+  
+)
+
+#' Check Algorithm parameters of a running Process object
+#'
+#' @param serverInfo A WTSPS object or URL
+#' @param processInfo A Process object or command
+#' @aliases parametrizeAlgorithm-generic
+#' @export
+setGeneric("parametrizeAlgorithm", function(serverInfo, processInfo){ standardGeneric("parametrizeAlgorithm")})
+
+#' @rdname parametrizeAlgorithm
+setMethod(
+
+  f = "parametrizeAlgorithm",
+
+  signature(serverInfo = "ANY", processInfo = "ANY"),
+
+  definition = function(serverInfo, processInfo) {
+
+    if (class(serverInfo) == "WTSCS")
+      serverURL <- serverInfo@serverURL
+    else if (class(serverInfo) == "character")
+            serverURL <- serverInfo
+          else
+            stop("WTSCS information type is not recognized")
+
+    if (class(processInfo) == "Process")
+      commands <- processInfo@commands
+    else if (class(processInfo) == "character")
+            commands <- processInfo
+         else
+           stop("Process information type is not recognized")
+
+    # We do need to change separator parameters
+    alg_params <- unlist(strsplit(commands, ",")) # parse algorithm parameters
+    tmp_parameters <- unlist(lapply(alg_params, function(x) {l <- unlist(strsplit(x, "="))})) # create a tmp vector of algorithm parameters names and values
+    
+    idx <- which(tmp_parameters == "name") # get name key idx
+    alg_name <- tmp_parameters[idx+1] # get name value (idx + 1)
+    alg <- Algorithm(serverURL, alg_name) # build Algorithm template object 
+    
+    tmp_parameters <- utils::tail(tmp_parameters, -2) # remove first two elements (name key and its value)
+    
+    if(length(tmp_parameters) != 0) #if any parameter
+      check <- applyAlgorithm(alg, tmp_parameters) # apply tmp_parameters into the Algorithm template
+    else 
+      check <- TRUE
+    
+    return (check)
+
+  }
+
 )
