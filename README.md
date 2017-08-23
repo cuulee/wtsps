@@ -41,7 +41,7 @@ Slot "serverURL":
 Slot "algorithms":
 [1] "TWDTW"
 ```
-It is possible to get the list of algorithms provided by a WTSPS service using a WTSCS object or simply a WTSPS server URL.
+It is possible to get the list of algorithms provided by a WTSPS service using a WTSPS object or simply a WTSPS server URL.
 
 ``` r
 listAlgorithms(serverInfo = "inst/extdata/wtsps/")
@@ -51,7 +51,7 @@ listAlgorithms(serverInfo = "inst/extdata/wtsps/")
 ## [1] "TWDTW"
 ```
 
-We are also able to acquire any algorithm metadata with describeAlgorithm. This function returns an Algorithm class containing its name, input_parameters, output and a description using a WTSCS object already created or directly a WTSCS server URL. 
+We are also able to acquire any algorithm metadata with describeAlgorithm. This function returns an Algorithm class containing its name, input_parameters, output and a description using a WTSPS object already created or directly a WTSPS server URL. 
 
 ```r
 describeAlgorithm(serverInfo = wtsps.server, name = "TWDTW")
