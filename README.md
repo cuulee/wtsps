@@ -1,6 +1,6 @@
-# R Client API for Web Time Series Classification Service 
+# R Client API for Web Time Series Processing Service 
 
-**wtscs** is an R Client package for handling Web Time Series Processing Service (WTSPS) in the client side.
+**wtsps** is an R Client package for handling Web Time Series Processing Service (WTSPS) in the client side.
 
 ## Build the package:
 
