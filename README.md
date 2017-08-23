@@ -24,7 +24,7 @@ library(wtsps.R) # R package name is wtscs
 A simple example of creating a WTSPS connection
 
 ``` r 
-wtscs.server <- WTSPS(serverURL = "inst/extdata/wtsps/")
+wtsps.server <- WTSPS(serverURL = "inst/extdata/wtsps/")
 ```
 
 The result is an Object of Class WTSPS. 
