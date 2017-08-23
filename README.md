@@ -18,7 +18,7 @@ Installing and loading wtsps package
 
 ``` r
 devtools::install_github("e-sensing/wtsps.R") # github repository name is wtsps
-library(wtsps.R) # R package name is wtscs
+library(wtsps.R) # R package name is wtsps
 ```
 
 A simple example of creating a WTSPS connection
