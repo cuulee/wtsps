@@ -1,12 +1,12 @@
 # R Client API for Web Time Series Classification Service 
 
-**wtscs** is an R Client package for handling Web Time Series Classification Service (WTSCS) in the client side.
+**wtscs** is an R Client package for handling Web Time Series Processing Service (WTSPS) in the client side.
 
 ## Build the package:
 
-Clone the project: git clone https://github.com/e-sensing/wtscs.git.
+Clone the project: git clone https://github.com/e-sensing/wtsps.R.git.
 
-Open Rstudio, go to File - Open Project and pick the file wtscs.Rproj.
+Open Rstudio, go to File - Open Project and pick the file wtsps.R.Rproj.
 
 Install the required package install.packages("roxygen2").
 
@@ -17,34 +17,34 @@ Go to the Build tab in the upper-right panel and press the button Build & Reload
 Installing and loading wtscs package
 
 ``` r
-devtools::install_github("e-sensing/wtscs") # github repository name is wtsps
-library(wtscs) # R package name is wtscs
+devtools::install_github("e-sensing/wtsps.R") # github repository name is wtsps
+library(wtsps.R) # R package name is wtscs
 ```
 
 A simple example of creating a WTSCS connection
 
 ``` r 
-wtscs.server <- WTSCS(serverURL = "inst/extdata/wtscs/")
+wtscs.server <- WTSPS(serverURL = "inst/extdata/wtsps/")
 ```
 
 The result is an Object of Class WTSCS. 
 
 ``` r
-wtscs.server
+wtsps.server
 ```
 
 ``` r
-An object of class "WTSCS"
+An object of class "WTSPS"
 Slot "serverURL":
-[1] "inst/extdata/wtscs/"
+[1] "inst/extdata/wtsps/"
 
 Slot "algorithms":
 [1] "TWDTW"
 ```
-It is possible to get the list of algorithms provided by a WTSCS service using a WTSCS object or simply a WTSCS server URL.
+It is possible to get the list of algorithms provided by a WTSPS service using a WTSCS object or simply a WTSPS server URL.
 
 ``` r
-listAlgorithms(serverInfo = "inst/extdata/wtscs/")
+listAlgorithms(serverInfo = "inst/extdata/wtsps/")
 ```
 
 ``` r
@@ -54,7 +54,7 @@ listAlgorithms(serverInfo = "inst/extdata/wtscs/")
 We are also able to acquire any algorithm metadata with describeAlgorithm. This function returns an Algorithm class containing its name, input_parameters, output and a description using a WTSCS object already created or directly a WTSCS server URL. 
 
 ```r
-describeAlgorithm(serverInfo = wtscs.server, name = "TWDTW")
+describeAlgorithm(serverInfo = wtsps.server, name = "TWDTW")
 ```
 ``` r
 An object of class "Algorithm"
@@ -78,7 +78,7 @@ Slot "description":
 Using input_parameters we can run any process with that algorithm as many parameters as possible.
 
 ```r
-run_process <- runProcess(serverInfo = "inst/extdata/wtscs/", name = "TWDTW", patterns = "X")
+run_process <- runProcess(serverInfo = "inst/extdata/wtsps/", name = "TWDTW", patterns = "X")
 ```
 ```r
 run_process
@@ -93,10 +93,10 @@ Slot "command":
 [1] "name=TWDTW,patterns=X"
 ```
 
-After that, WTSCS generates an identifier for this process so the user can see its status if necessary.
+After that, WTSPS generates an identifier for this process so the user can see its status if necessary.
 
 ```r
-status.proc <- statusProcess(serverInfo = "inst/extdata/wtscs/", processInfo = 1)
+status.proc <- statusProcess(serverInfo = "inst/extdata/wtsps/", processInfo = 1)
 ```
 ```r
 status.proc
@@ -114,7 +114,7 @@ Slot "command":
 Or even cancel the process.
 
 ```r
-cancel.proc <- cancelProcess(serverInfo = "inst/extdata/wtscs/", processInfo = 1)
+cancel.proc <- cancelProcess(serverInfo = "inst/extdata/wtsps/", processInfo = 1)
 ```
 ```r
 cancel.proc
