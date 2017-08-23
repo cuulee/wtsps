@@ -2,12 +2,12 @@
 #'
 #' @param serverURL a WTSPS server URL
 #' 
-#' @name WTSCS
-#' @rdname WTSCS-class
+#' @name WTSPS
+#' @rdname WTSPS-class
 #' @export
-WTSCS <- function(serverURL) {
+WTSPS <- function(serverURL) {
   
-  methods::new (Class = "WTSCS", 
+  methods::new (Class = "WTSPS", 
                 serverURL = serverURL)
   
 }
@@ -18,21 +18,21 @@ validWTSCSObject <- function(object) {
   length_serverURL <- length(object@serverURL)
   
   if (length_serverURL != 1) {
-    messsage <- paste("[WTSCS: Object validation] WTSCS has no URL server", sep = "")
+    messsage <- paste("[WTSPS: Object validation] WTSPS has no URL server", sep = "")
     errors <- c(errors, message)
   }
   
   nchar_serverURL <- nchar(object@serverURL)
   
   if (nchar_serverURL <= 1) {
-    message <- paste("[WTSCS: Object validation] WTSCS has an invalid URL server", sep = "")
+    message <- paste("[WTSPS: Object validation] WTSPS has an invalid URL server", sep = "")
     errors <- c(errors, message)
   }
   
   length_algorithms <- length(object@algorithms)
   
   if (length_algorithms < 1) {
-    messsage <- paste("[WTSCS: Object validation] WTSCS has no algorithms", sep = "")
+    messsage <- paste("[WTSPS: Object validation] WTSPS has no algorithms", sep = "")
     errors <- c(errors, message)
   }
   
@@ -42,15 +42,15 @@ validWTSCSObject <- function(object) {
 
 setValidity(
   
-  Class = "WTSCS", 
+  Class = "WTSPS", 
   
   method = validWTSCSObject
   
 )
 
-#' Returns the WTSCS object's server URL
+#' Returns the WTSPS object's server URL
 #'
-#' @param object A WTSCS object
+#' @param object A WTSPS object
 #' @aliases getServerURL-generic
 #' @export
 setGeneric("getServerURL", function(object){standardGeneric("getServerURL")})
@@ -60,7 +60,7 @@ setMethod(
   
   f = "getServerURL",
   
-  signature = "WTSCS", 
+  signature = "WTSPS", 
   
   definition = function(object) {
     
@@ -74,9 +74,9 @@ setMethod(
   
 )
 
-#' Returns the WTSCS object's algorithms
+#' Returns the WTSPS object's algorithms
 #'
-#' @param object A WTSCS object
+#' @param object A WTSPS object
 #' @aliases getAlgorithms-generic
 #' @export
 setGeneric("getAlgorithms", function(object){standardGeneric("getAlgorithms")})
@@ -86,7 +86,7 @@ setMethod(
   
   f = "getAlgorithms",
   
-  signature = "WTSCS", 
+  signature = "WTSPS", 
   
   definition = function(object) {
     
@@ -96,9 +96,9 @@ setMethod(
   
 )
 
-#' Returns the WTSCS object's algorithms
+#' Returns the WTSPS object's algorithms
 #'
-#' @param serverInfo A WTSCS object or URL
+#' @param serverInfo A WTSPS object or URL
 #' @aliases listAlgorithms-generic
 #' @export
 setGeneric("listAlgorithms", function(serverInfo){standardGeneric("listAlgorithms")})
@@ -113,16 +113,16 @@ setMethod(
   definition = function(serverInfo) {
     
     if (missing(serverInfo)) 
-      stop("Missing a WTSCS server information")
+      stop("Missing a WTSPS server information")
     
-    if (class(serverInfo) == "WTSCS") 
+    if (class(serverInfo) == "WTSPS") 
       algorithms <- serverInfo@algorithms
     else {
         if (class(serverInfo) == "character") {
-            wtscs.server <- WTSCS(serverInfo)
-            algorithms <- wtscs.server@algorithms
+            wtsps.server <- WTSPS(serverInfo)
+            algorithms <- wtsps.server@algorithms
         } else 
-             stop("WTSCS server object type is not recognized") 
+             stop("WTSPS server object type is not recognized") 
     }
     
     return(algorithms)
@@ -131,9 +131,9 @@ setMethod(
   
 )
 
-#' Returns an Algorithm Class in a WTSCS server URL queried by name
+#' Returns an Algorithm Class in a WTSPS server URL queried by name
 #'
-#' @param serverInfo a WTSCS server object or URL
+#' @param serverInfo a WTSPS server object or URL
 #' @param name An Algorithm name
 #' @aliases describeAlgorithm-generic
 #' @export
@@ -149,12 +149,12 @@ setMethod(
   definition = function(serverInfo, name) {
     
     if (missing(serverInfo)) 
-      stop("Missing a WTSCS server information")
+      stop("Missing a WTSPS server information")
     
     if (missing(name)) 
       stop("Missing an Algorithm name")
     
-    if (class(serverInfo) == "WTSCS")
+    if (class(serverInfo) == "WTSPS")
       serverURL <- serverInfo@serverURL
     else
       serverURL <- serverInfo
@@ -167,9 +167,9 @@ setMethod(
   
 )
 
-#' Returns a Process status in a WTSCS server URL
+#' Returns a Process status in a WTSPS server URL
 #'
-#' @param serverInfo a WTSCS object or URL
+#' @param serverInfo a WTSPS object or URL
 #' @param processInfo a Process object
 #' @aliases statusProcess-generic
 #' @export
@@ -186,14 +186,14 @@ setMethod(
     
     # check missing wtsps information
     if (missing(serverInfo))
-      stop("Missing a WTSCS server information")
+      stop("Missing a WTSPS server information")
     
     # check missing process information
     if (missing(processInfo))
       stop("Missing a Process information")
     
     # check class of server information
-    if (class(serverInfo) == "WTSCS")
+    if (class(serverInfo) == "WTSPS")
         serverURL <- serverInfo@serverURL
     else {
         if (class(serverInfo) == "character")
@@ -221,9 +221,9 @@ setMethod(
   
 )
 
-#' Returns a Process status in a WTSCS server URL
+#' Returns a Process status in a WTSPS server URL
 #'
-#' @param serverInfo a WTSCS object or URL
+#' @param serverInfo a WTSPS object or URL
 #' @param processInfo a Process object
 #' @aliases cancelProcess-generic
 #' @export
@@ -240,14 +240,14 @@ setMethod(
     
     # check missing wtsps information
     if (missing(serverInfo)) 
-      stop("Missing a WTSCS server information")
+      stop("Missing a WTSPS server information")
     
     # check missing process information
     if (missing(processInfo))
       stop("Missing a Process information")
     
     # check class of wtsps information
-    if (class(serverInfo) == "WTSCS")
+    if (class(serverInfo) == "WTSPS")
         serverURL <- serverInfo@serverURL
     else {
         if (class(serverInfo) == "character")
@@ -275,9 +275,9 @@ setMethod(
   
 )
 
-#' Executes a Process command in a WTSCS server URL
+#' Executes a Process command in a WTSPS server URL
 #'
-#' @param serverInfo a WTSCS object or URL
+#' @param serverInfo a WTSPS object or URL
 #' @param ... remaining Algorithm parameters
 #' @aliases runProcess-generic
 #' @export
@@ -295,13 +295,13 @@ setMethod(
       stop("Missing a WTSCS server information")
     
     
-    if (class(serverInfo) == "WTSCS")
+    if (class(serverInfo) == "WTSPS")
       serverURL <- serverInfo@serverURL
     else {
       if (class(serverInfo) == "character")
         serverURL <- serverInfo
       else 
-        stop("WTSCS server information type is not recognized")
+        stop("WTSPS server information type is not recognized")
     }
 
     params <- as.list(match.call())[c(-1,-2)] # get params from the function call

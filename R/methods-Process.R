@@ -1,6 +1,6 @@
 #' Wrapper function Process
 #'
-#' @param serverInfo a WTSCS server URL
+#' @param serverInfo a WTSPS server URL
 #' @param processInfo a Process identifier
 #' @param processStatus a Process identifier
 #' 
@@ -22,14 +22,14 @@ validProcessObject <- function(object) {
   length_uuid <- length(object@uuid)
   
   if (length_uuid != 1) {
-    messsage <- paste("[WTSCS: Process Object validation] Process has no id!", sep = "")
+    messsage <- paste("[WTSPS: Process Object validation] Process has no id!", sep = "")
     errors <- c(errors, message)
   }
   
   length_status <- length(object@status)
   
   if (length_status != 1) {
-    messsage <- paste("[WTSCS: Process Object validation] Process has no status!", sep = "")
+    messsage <- paste("[WTSPS: Process Object validation] Process has no status!", sep = "")
     errors <- c(errors, message)
   }
   
@@ -128,12 +128,12 @@ setMethod(
 
   definition = function(serverInfo, processInfo) {
 
-    if (class(serverInfo) == "WTSCS")
+    if (class(serverInfo) == "WTSPS")
       serverURL <- serverInfo@serverURL
     else if (class(serverInfo) == "character")
             serverURL <- serverInfo
           else
-            stop("WTSCS information type is not recognized")
+            stop("WTSPS information type is not recognized")
 
     if (class(processInfo) == "Process")
       commands <- processInfo@commands

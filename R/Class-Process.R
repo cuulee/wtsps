@@ -2,7 +2,7 @@
 #' 
 #' Class Process.
 #'
-#' Class \code{Process} declaration helps to define a Web Time Series Classification Service.
+#' Class \code{Process} declaration helps to define a Web Time Series Processing Service.
 #' 
 #'@section Slots :
 #' \describe{
@@ -42,7 +42,7 @@ setMethod(
     
     # if wtsps information is missing
     if (missing(serverInfo))
-      stop("Missing WTSCS information: Process cannot be created")
+      stop("Missing WTSPS information: Process cannot be created")
     else
       if (class(serverInfo) == "WTSPS")
         serverURL <- serverInfo@serverURL

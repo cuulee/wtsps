@@ -2,7 +2,7 @@
 #'
 #' Class Algorithm.
 #'
-#' Class \code{Algorithm} declaration helps to define an Algorithm in Web Time Series Classification Service.
+#' Class \code{Algorithm} declaration helps to define an Algorithm in Web Time Series Processing Service.
 #' 
 #'@section Slots :
 #' \describe{   
@@ -44,9 +44,9 @@ setMethod(
     
     # if WTSPS server URL is missing
     if (missing(serverURL))
-      stop("Missing a WTSCS server URL")
+      stop("Missing a WTSPS server URL")
     else if (class(serverURL) != "character")   
-      stop("WTSCS server URL type is not recognized")
+      stop("WTSPS server URL type is not recognized")
     
     # if Algorithm name is missing
     if (missing(name))

@@ -2,7 +2,7 @@
 #' 
 #' Class User.
 #'
-#' Class \code{User} declaration helps to define a Web Time Series Classification Service.
+#' Class \code{User} declaration helps to define a Web Time Series Processing Service.
 #' 
 #'@section Slots :
 #' \describe{

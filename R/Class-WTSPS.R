@@ -1,8 +1,8 @@
 #' @include utils.R
 #' 
-#' Class WTSCS.
+#' Class WTSPS.
 #'
-#' Class \code{WTSCS} declaration helps to define a Web Time Series Processing Service.
+#' Class \code{WTSPS} declaration helps to define a Web Time Series Processing Service.
 #' 
 #'@section Slots :
 #' \describe{
@@ -10,13 +10,13 @@
 #' \item{\code{algorithms}:}{Attribute of class \code{"character"}, algorithms of the server.}
 #' }
 #' 
-#' @name WTSCS-class
-#' @rdname WTSCS-class
-#' @exportClass WTSCS
+#' @name WTSPS-class
+#' @rdname WTSPS-class
+#' @exportClass WTSPS
 setClass(
   
   # Set the name for the class
-  Class = "WTSCS",
+  Class = "WTSPS",
   
   # Define the slots
   slots = c(
@@ -26,23 +26,23 @@ setClass(
   
 )
 
-# Constructor method of WTSCS Class.
+# Constructor method of WTSPS Class.
 setMethod(
   
   # initialize function
   f = "initialize",
   
   # Method signature
-  signature = "WTSCS",
+  signature = "WTSPS",
   
   # Function definition
   definition = function(.Object, serverURL = "character") {
     
-    # if WTSCS server URL is missing
+    # if WTSPS server URL is missing
     if (missing(serverURL))
-       stop("Missing a WTSCS server URL")
+       stop("Missing a WTSPS server URL")
     else if (class(serverURL) != "character")   
-            stop("WTSCS server URL type is not recognized")
+            stop("WTSPS server URL type is not recognized")
     
     # build list algorithms request string
     request <- paste(serverURL, "list_algorithms", sep = "")

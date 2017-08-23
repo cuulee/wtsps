@@ -1,6 +1,6 @@
 #' Wrapper function Algorithm
 #'
-#' @param serverURL a WTSCS server URL
+#' @param serverURL a WTSPS server URL
 #' @param name an Algorithm name
 #' 
 #' @name Algorithm
@@ -20,28 +20,28 @@ validAlgorithmObject <- function(object) {
   length_name <- length(object@name)
   
   if (length_name != 1) {
-    messsage <- paste("[WTSCS: Algorithm Object validation] Algorithm has no name!", sep = "")
+    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no name!", sep = "")
     errors <- c(errors, message)
   }
   
   length_input_parameters <- length(object@input_parameters)
   
   if (length_input_parameters < 1) {
-    messsage <- paste("[WTSCS: Algorithm Object validation] Algorithm has no input parameters!", sep = "")
+    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no input parameters!", sep = "")
     errors <- c(errors, message)
   }
   
   length_output <- length(object@output)
   
   if (length_output < 1) {
-    messsage <- paste("[WTSCS: Algorithm Object validation] Algorithm has no output!", sep = "")
+    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no output!", sep = "")
     errors <- c(errors, message)
   }
   
   length_description <- length(object@description)
   
   if (length_description != 1) {
-    messsage <- paste("[WTSCS: Algorithm Object validation] Algorithm has no description!", sep = "")
+    messsage <- paste("[WTSPS: Algorithm Object validation] Algorithm has no description!", sep = "")
     errors <- c(errors, message)
   }
   
