@@ -9,7 +9,7 @@
 Process(serverInfo, processInfo, processStatus)
 }
 \arguments{
-\item{serverInfo}{a WTSCS server URL}
+\item{serverInfo}{a WTSPS server URL}
 
 \item{processInfo}{a Process identifier}
 

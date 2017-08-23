@@ -9,7 +9,7 @@
 Algorithm(serverURL, name)
 }
 \arguments{
-\item{serverURL}{a WTSCS server URL}
+\item{serverURL}{a WTSPS server URL}
 
 \item{name}{an Algorithm name}
 }
