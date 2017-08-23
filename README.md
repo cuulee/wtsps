@@ -14,20 +14,20 @@ Go to the Build tab in the upper-right panel and press the button Build & Reload
 
 ## Getting started
 
-Installing and loading wtscs package
+Installing and loading wtsps package
 
 ``` r
 devtools::install_github("e-sensing/wtsps.R") # github repository name is wtsps
 library(wtsps.R) # R package name is wtscs
 ```
 
-A simple example of creating a WTSCS connection
+A simple example of creating a WTSPS connection
 
 ``` r 
 wtscs.server <- WTSPS(serverURL = "inst/extdata/wtsps/")
 ```
 
-The result is an Object of Class WTSCS. 
+The result is an Object of Class WTSPS. 
 
 ``` r
 wtsps.server
