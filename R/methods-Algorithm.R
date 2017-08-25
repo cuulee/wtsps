@@ -57,6 +57,45 @@ setValidity(
   
 )
 
+printAlgorithmobject <- function(object) {
+  
+  cat(paste("Object of Class Algorithm: \n\n"))
+  
+  # print name
+  cat(paste("The Algorithm name is:", object@name, "\n\n"))
+  
+  # print input parameters
+  cat(paste("input parameters: \n"))
+  cat(paste("  ", names(object@input_parameters), "=", object@input_parameters, "\n"))
+      
+  # print output
+  cat(paste("\noutput: \n"))
+  cat(paste("  ", names(object@output), "=", object@output, "\n"))
+  
+  # print description
+  cat(paste("\ndescription: ", object@description, "\n"))
+  
+}
+
+setMethod(
+  
+  # Name of the function
+  f = "show", 
+  
+  # Method signature
+  signature = "Algorithm", 
+  
+  # Stylish print of the objects
+  definition = function(object) {
+    
+    printAlgorithmobject(object)
+    
+    return(invisible())
+    
+  }
+  
+)
+
 #' Returns an Algorithm name
 #'
 #' @param object An Algorithm object

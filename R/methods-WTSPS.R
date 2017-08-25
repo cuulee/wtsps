@@ -12,7 +12,7 @@ WTSPS <- function(serverURL) {
   
 }
 
-validWTSCSObject <- function(object) {
+validWTSPSObject <- function(object) {
   
   errors <- character()
   length_serverURL <- length(object@serverURL)
@@ -44,16 +44,48 @@ setValidity(
   
   Class = "WTSPS", 
   
-  method = validWTSCSObject
+  method = validWTSPSObject
+  
+)
+
+printWTSPSobject <- function(object) {
+ 
+  # initial message
+  cat(paste("Object of Class WTSPS\n\n"))
+  
+  # print serverURL
+  cat(paste("The WTSPS server URL is:", object@serverURL, "\n"))
+  
+  # print algorithms
+  cat(paste("The available algorithms are:", object@algorithms, "\n"))
+   
+}
+
+setMethod(
+  
+  # Name of the function
+  f = "show", 
+  
+  # Method signature
+  signature = "WTSPS", 
+  
+  # Stylish print of the objects
+  definition = function(object) {
+    
+    printWTSPSobject(object)
+    
+    return(invisible())
+    
+  }
   
 )
 
 #' Returns the WTSPS object's server URL
 #'
-#' @param object A WTSPS object
+#' @param serverInfo A WTSPS object
 #' @aliases getServerURL-generic
 #' @export
-setGeneric("getServerURL", function(object){standardGeneric("getServerURL")})
+setGeneric("getServerURL", function(serverInfo){standardGeneric("getServerURL")})
 
 #' @rdname getServerURL
 setMethod(
@@ -62,13 +94,13 @@ setMethod(
   
   signature = "WTSPS", 
   
-  definition = function(object) {
+  definition = function(serverInfo) {
     
     # if last character is different from slash add one
-    if(substr(object@serverURL, nchar(object@serverURL), nchar(object@serverURL)) != "/") 
-      return(paste(object@serverURL,"/", sep=""))
+    if(substr(serverInfo@serverURL, nchar(serverInfo@serverURL), nchar(serverInfo@serverURL)) != "/") 
+      return(paste(serverInfo@serverURL,"/", sep=""))
     
-    return (object@serverURL)
+    return (serverInfo@serverURL)
     
   }
   
@@ -76,10 +108,10 @@ setMethod(
 
 #' Returns the WTSPS object's algorithms
 #'
-#' @param object A WTSPS object
+#' @param serverInfo A WTSPS object
 #' @aliases getAlgorithms-generic
 #' @export
-setGeneric("getAlgorithms", function(object){standardGeneric("getAlgorithms")})
+setGeneric("getAlgorithms", function(serverInfo){standardGeneric("getAlgorithms")})
 
 #' @rdname getAlgorithms
 setMethod(
@@ -88,9 +120,9 @@ setMethod(
   
   signature = "WTSPS", 
   
-  definition = function(object) {
+  definition = function(serverInfo) {
     
-    return(object@algorithms)
+    return(serverInfo@algorithms)
     
   }
   

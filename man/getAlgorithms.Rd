@@ -7,12 +7,12 @@
 \alias{getAlgorithms,WTSPS-method}
 \title{Returns the WTSPS object's algorithms}
 \usage{
-getAlgorithms(object)
+getAlgorithms(serverInfo)
 
-\S4method{getAlgorithms}{WTSPS}(object)
+\S4method{getAlgorithms}{WTSPS}(serverInfo)
 }
 \arguments{
-\item{object}{A WTSPS object}
+\item{serverInfo}{A WTSPS object}
 }
 \description{
 Returns the WTSPS object's algorithms

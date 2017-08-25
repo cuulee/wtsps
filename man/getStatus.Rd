@@ -7,12 +7,12 @@
 \alias{getStatus,Process-method}
 \title{Returns a Process status}
 \usage{
-getStatus(object)
+getStatus(processInfo)
 
-\S4method{getStatus}{Process}(object)
+\S4method{getStatus}{Process}(processInfo)
 }
 \arguments{
-\item{object}{A Process object}
+\item{processInfo}{A Process object}
 }
 \description{
 Returns a Process status

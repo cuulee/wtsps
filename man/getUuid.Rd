@@ -7,12 +7,12 @@
 \alias{getUuid,Process-method}
 \title{Returns a Process id}
 \usage{
-getUuid(object)
+getUuid(processInfo)
 
-\S4method{getUuid}{Process}(object)
+\S4method{getUuid}{Process}(processInfo)
 }
 \arguments{
-\item{object}{A Process object}
+\item{processInfo}{A Process object}
 }
 \description{
 Returns a Process id

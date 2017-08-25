@@ -45,12 +45,53 @@ setValidity(
   
 )
 
+printProcessobject <- function(object) {
+  
+  cat(paste("Object of Class Process: \n\n"))
+  
+  # print uuid
+  cat(paste("The Process uuid is:", object@uuid, "\n\n"))
+  
+  # print status
+  cat(paste("Current status:", object@status, "\n\n"))
+  
+  # print command
+  cat(paste("Command (parameter = value) to enter in the server: \n"))
+  
+  # change collapse when necessary
+  command.vec <- unlist(strsplit(unlist(strsplit(object@command, ",")), "="))
+  
+  # print each (parameter, value) separately
+  for(i in seq(1, length(command.vec), 2))
+    cat(paste("   ", command.vec[i], " = ", command.vec[i+1], "\n"))
+  
+}
+
+setMethod(
+  
+  # Name of the function
+  f = "show", 
+  
+  # Method signature
+  signature = "Process", 
+  
+  # Stylish print of the objects
+  definition = function(object) {
+    
+    printProcessobject(object)
+    
+    return(invisible())
+    
+  }
+  
+)
+
 #' Returns a Process id
 #'
-#' @param object A Process object
+#' @param processInfo A Process object
 #' @aliases getUuid-generic
 #' @export
-setGeneric("getUuid", function(object){ standardGeneric("getUuid")})
+setGeneric("getUuid", function(processInfo){ standardGeneric("getUuid")})
 
 #' @rdname getUuid
 setMethod(
@@ -59,9 +100,9 @@ setMethod(
   
   signature = "Process", 
   
-  definition = function(object) {
+  definition = function(processInfo) {
     
-    return (object@uuid)
+    return (processInfo@uuid)
     
   }
   
@@ -69,10 +110,10 @@ setMethod(
 
 #' Returns a Process status
 #'
-#' @param object A Process object
+#' @param processInfo A Process object
 #' @aliases getStatus-generic
 #' @export
-setGeneric("getStatus", function(object){ standardGeneric("getStatus")})
+setGeneric("getStatus", function(processInfo){ standardGeneric("getStatus")})
 
 #' @rdname getStatus
 setMethod(
@@ -81,9 +122,9 @@ setMethod(
   
   signature = "Process", 
   
-  definition = function(object) {
+  definition = function(processInfo) {
     
-    return (object@status)
+    return (processInfo@status)
     
   }
   
@@ -91,10 +132,10 @@ setMethod(
 
 #' Returns a Process status
 #'
-#' @param object A Process object
+#' @param processInfo A Process object
 #' @aliases getCommand-generic
 #' @export
-setGeneric("getCommand", function(object){ standardGeneric("getCommand")})
+setGeneric("getCommand", function(processInfo){ standardGeneric("getCommand")})
 
 #' @rdname getCommand
 setMethod(
@@ -103,9 +144,9 @@ setMethod(
   
   signature = "Process", 
   
-  definition = function(object) {
+  definition = function(processInfo) {
     
-    return (object@command)
+    return (processInfo@command)
     
   }
   

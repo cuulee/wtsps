@@ -7,12 +7,12 @@
 \alias{getServerURL,WTSPS-method}
 \title{Returns the WTSPS object's server URL}
 \usage{
-getServerURL(object)
+getServerURL(serverInfo)
 
-\S4method{getServerURL}{WTSPS}(object)
+\S4method{getServerURL}{WTSPS}(serverInfo)
 }
 \arguments{
-\item{object}{A WTSPS object}
+\item{serverInfo}{A WTSPS object}
 }
 \description{
 Returns the WTSPS object's server URL
