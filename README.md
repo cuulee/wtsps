@@ -34,12 +34,10 @@ wtsps.server
 ```
 
 ``` r
-An object of class "WTSPS"
-Slot "serverURL":
-[1] "inst/extdata/wtsps/"
+Object of Class WTSPS
 
-Slot "algorithms":
-[1] "TWDTW"
+The WTSPS server URL is: inst/extdata/wtsps/ 
+The available algorithms are: TWDTW 
 ```
 It is possible to get the list of algorithms provided by a WTSPS service using a WTSPS object or simply a WTSPS server URL.
 
@@ -57,22 +55,30 @@ We are also able to acquire any algorithm metadata with describeAlgorithm. This 
 describeAlgorithm(serverInfo = wtsps.server, name = "TWDTW")
 ```
 ``` r
-An object of class "Algorithm"
-Slot "name":
-[1] "TWDTW"
+Object of Class Algorithm: 
 
-Slot "input_parameters":
-         patterns       dist.method             alpha              beta             theta          interval 
-"twdtwTimeSeries"       "character"          "double"          "double"          "double"       "character" 
-             span              keep           overlap        start_date          end_date 
-        "integer"         "boolean"          "double"       "character"       "character" 
+The Algorithm name is: TWDTW 
 
-Slot "output":
-     from        to     label  distance 
-"integer" "integer" "integer"  "double" 
+input parameters: 
+   patterns = twdtwTimeSeries 
+    dist.method = character 
+    alpha = double 
+    beta = double 
+    theta = double 
+    interval = character 
+    span = integer 
+    keep = boolean 
+    overlap = double 
+    start_date = character 
+    end_date = character 
 
-Slot "description":
-[1] "Time-Weighted Dynamic Time Warping (TWDTW) method for land use and land cover mapping using satellite image time series."
+output: 
+   from = integer 
+    to = integer 
+    label = integer 
+    distance = double 
+
+description:  Time-Weighted Dynamic Time Warping (TWDTW) method for land use and land cover mapping using satellite image time series.
 ```
 
 Using input_parameters we can run any process with that algorithm as many parameters as possible.
@@ -82,15 +88,15 @@ run_process <- runProcess(serverInfo = "inst/extdata/wtsps/", name = "TWDTW", pa
 ```
 ```r
 run_process
-An object of class "Process"
-Slot "uuid":
-[1] 1
+Object of Class Process: 
 
-Slot "status":
-[1] "Scheduled"
+The Process uuid is: 1 
 
-Slot "command":
-[1] "name=TWDTW,patterns=X"
+Current status: Scheduled 
+
+Command (parameter = value) to enter in the server: 
+    name  =  TWDTW 
+    patterns  =  X
 ```
 
 After that, WTSPS generates an identifier for this process so the user can see its status if necessary.
@@ -100,15 +106,15 @@ status.proc <- statusProcess(serverInfo = "inst/extdata/wtsps/", processInfo = 1
 ```
 ```r
 status.proc
-An object of class "Process"
-Slot "uuid":
-[1] 1
+Object of Class Process: 
 
-Slot "status":
-[1] "In Progress"
+The Process uuid is: 1 
 
-Slot "command":
-[1] "name=TWDTW,patterns=X"
+Current status: In Progress 
+
+Command (parameter = value) to enter in the server: 
+    name  =  TWDTW 
+    patterns  =  X
 ```
 
 Or even cancel the process.
@@ -118,15 +124,15 @@ cancel.proc <- cancelProcess(serverInfo = "inst/extdata/wtsps/", processInfo = 1
 ```
 ```r
 cancel.proc
-An object of class "Process"
-Slot "uuid":
-[1] 1
+Object of Class Process: 
 
-Slot "status":
-[1] "Cancelled"
+The Process uuid is: 1 
 
-Slot "command":
-[1] "name=TWDTW,patterns=X"
+Current status: Cancelled 
+
+Command (parameter = value) to enter in the server: 
+    name  =  TWDTW 
+    patterns  =  X
 ```
 
 ## Reporting Bugs
