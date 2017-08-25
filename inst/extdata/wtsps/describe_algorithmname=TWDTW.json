@@ -1,0 +1,23 @@
+{                   
+  "name": "TWDTW",
+  "input_parameters": {
+    "patterns": "twdtwTimeSeries",
+    "dist.method": "character",
+    "alpha": "double",
+    "beta": "double",
+    "theta": "double",
+    "interval": "character",
+    "span": "integer",
+    "keep": "boolean",
+    "overlap": "double",
+    "start_date": "character",
+    "end_date": "character"
+  },
+  "output": {
+    "from":"integer", 
+    "to":"integer", 
+    "label":"integer",
+    "distance":"double"
+  },
+  "description": "Time-Weighted Dynamic Time Warping (TWDTW) method for land use and land cover mapping using satellite image time series."
+}
