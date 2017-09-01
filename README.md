@@ -4,9 +4,9 @@
 
 ## Build the package:
 
-Clone the project: git clone https://github.com/e-sensing/wtsps.R.git.
+Clone the project: git clone https://github.com/e-sensing/wtsps.git.
 
-Open Rstudio, go to File - Open Project and pick the file wtsps.R.Rproj.
+Open Rstudio, go to File - Open Project and pick the file wtsps.Rproj.
 
 Install the required package install.packages("roxygen2").
 
@@ -17,8 +17,8 @@ Go to the Build tab in the upper-right panel and press the button Build & Reload
 Installing and loading wtsps package
 
 ``` r
-devtools::install_github("e-sensing/wtsps.R") # github repository name is wtsps
-library(wtsps.R) # R package name is wtsps
+devtools::install_github("e-sensing/wtsps") # github repository name is wtsps
+library(wtsps) # R package name is wtsps
 ```
 
 A simple example of creating a WTSPS connection

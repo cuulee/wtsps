@@ -1,4 +1,4 @@
-Package: wtsps.R
+Package: wtsps
 Type: Package
 Title: An R client for handling processing of remote sensing time series
 Version: 1.0.0
@@ -14,8 +14,8 @@ Imports: methods,
          jsonlite
 License: LGPL-3 + file LICENSE
 RoxygenNote: 6.0.1
-URL: https://github.com/e-sensing/wtsps.R
-BugReports: https://github.com/e-sensing/wtsps.R/issues
+URL: https://github.com/e-sensing/wtsps
+BugReports: https://github.com/e-sensing/wtsps/issues
 Collate: 
     'utils.R'
     'Class-Algorithm.R'
